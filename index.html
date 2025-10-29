@@ -1,16 +1,58 @@
+<!-- ========================================================================
+     ARQUIVO: index.html
+     DESCRIÇÃO: Estrutura HTML principal da aplicação Pokédex
+     ======================================================================== -->
+
 <!doctype html>
+<!-- Define que este é um documento HTML5 -->
 <html lang="pt-BR">
+<!-- Define o idioma da página como português brasileiro -->
+
 <head>
+  <!-- Seção de metadados e configurações do documento -->
+  
+  <!-- Define a codificação de caracteres como UTF-8 (suporta acentos e caracteres especiais) -->
   <meta charset="utf-8" />
+  
+  <!-- Define a viewport para responsividade em dispositivos móveis -->
+  <!-- width=device-width: a largura da página é a largura do dispositivo -->
+  <!-- initial-scale=1: zoom inicial é 100% (sem zoom) -->
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Pokédex — Atomic Design + MVC</title>
+  
+  <!-- Define o título da página (aparece na aba do navegador) -->
+  <title>Pokédex — projeto da faculdade</title>
+  
+  <!-- Importa o arquivo CSS para estilização -->
+  <!-- rel="stylesheet" indica que é uma folha de estilos -->
+  <!-- href="css/style.css" aponta para o arquivo CSS -->
   <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
+  <!-- Corpo da página (conteúdo visível) -->
+  
+  <!-- Container principal que agrupa toda a aplicação -->
+  <!-- id="app" é usado para referência (não é usado no código atual, mas pode ser útil) -->
+  <!-- class="container" aplica estilos de largura máxima e centralização -->
   <div id="app" class="container">
+    
+    <!-- Header (cabeçalho) da aplicação -->
+    <!-- id="app-header" é selecionado pelo JavaScript para adicionar título e barra de busca -->
+    <!-- Inicialmente vazio; será preenchido pelo controller -->
     <header id="app-header"></header>
+    
+    <!-- Main (conteúdo principal) da aplicação -->
+    <!-- id="app-main" é selecionado pelo JavaScript para adicionar lista e painel de detalhes -->
+    <!-- Inicialmente vazio; será preenchido pelo controller -->
     <main id="app-main"></main>
+    
   </div>
+
+  <!-- Script JavaScript que inicializa a aplicação -->
+  <!-- type="module" indica que é um módulo ES6 (permite import/export) -->
+  <!-- src="src/main.js" aponta para o arquivo JavaScript principal -->
+  <!-- Este script aguarda DOMContentLoaded e chama PokedexController.init() -->
   <script type="module" src="src/main.js"></script>
 </body>
+
 </html>

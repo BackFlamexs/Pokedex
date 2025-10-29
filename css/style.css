@@ -1,28 +1,266 @@
+/* ========================================================================
+   ARQUIVO: style.css
+   DESCRIÇÃO: Estilos CSS da aplicação Pokédex
+   TEMA: Claro (fundo branco, texto escuro)
+   ======================================================================== */
+
+/* ========================================================================
+   VARIÁVEIS DE COR (CSS Custom Properties)
+   Facilita manutenção: altere aqui e afeta toda a aplicação
+   ======================================================================== */
 :root{
-  --bg:#071229;
-  --card:#0b1220;
-  --accent:#ef4444;
-  --muted:#94a3b8;
-  --glass: rgba(255,255,255,0.03);
+  --bg:#ffffff;                /* Cor de fundo principal (branco) */
+  --card:#f7f7f8;              /* Cor de fundo dos cards (cinza muito claro) */
+  --accent:#dc2626;            /* Cor de destaque (vermelho para botões) */
+  --muted:#475569;             /* Cor de texto secundário (cinza escuro) */
+  --border:#e5e7eb;            /* Cor de bordas (cinza claro) */
 }
+
+/* ========================================================================
+   RESET E ESTILOS GLOBAIS
+   ======================================================================== */
+
+/* Aplica box-sizing: border-box a todos os elementos */
+/* Isso faz padding e border serem inclusos na largura/altura */
 *{box-sizing:border-box}
-body{margin:0;font-family:Inter, system-ui, -apple-system, Arial;background:linear-gradient(180deg,#031027,#071229 60%);color:#e6eef6;-webkit-font-smoothing:antialiased;}
-.container{max-width:1100px;margin:24px auto;padding:16px}
-header.header{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.title{display:flex;flex-direction:column}
-.title h1{margin:0;font-size:20px}
-.title p{margin:0;color:var(--muted);font-size:13px}
-.search{display:flex;gap:8px;align-items:center}
-.input{padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:var(--glass);color:inherit;min-width:220px}
-.btn{padding:8px 12px;border-radius:10px;border:none;cursor:pointer;background:var(--accent);color:#fff}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-top:20px}
-.card{background:var(--card);padding:12px;border-radius:12px;display:flex;flex-direction:column;align-items:center;cursor:pointer;transition:transform .12s ease, box-shadow .12s ease}
-.card:hover{transform:translateY(-6px);box-shadow:0 10px 30px rgba(0,0,0,0.6)}
-.card img{width:96px;height:96px;object-fit:contain}
-.types{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
-.type{padding:4px 8px;border-radius:999px;background:rgba(255,255,255,0.03);font-size:12px;text-transform:capitalize}
-.detail{position:fixed;right:20px;top:20px;width:320px;background:linear-gradient(180deg,#061223,#062033);padding:16px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.6);z-index:40}
-.stat-row{display:flex;justify-content:space-between;margin:6px 0;font-size:13px;color:var(--muted);text-transform:capitalize}
-.pagination{display:flex;gap:8px;justify-content:center;margin-top:16px}
-.muted{color:var(--muted);font-size:13px}
-@media (max-width:900px){.detail{position:static;width:auto;margin-top:12px}}
+
+/* Estilos do elemento <body> */
+body{
+  margin:0;                                    /* Remove margem padrão */
+  font-family:Inter, system-ui, -apple-system, Arial; /* Define fonte */
+  background:var(--bg);                        /* Fundo branco */
+  color:#0f172a;                               /* Texto escuro */
+  -webkit-font-smoothing:antialiased;          /* Suaviza renderização de fonte */
+}
+
+/* ========================================================================
+   CONTAINER PRINCIPAL
+   ======================================================================== */
+
+/* Container que agrupa toda a aplicação */
+.container{
+  max-width:1100px;            /* Largura máxima */
+  margin:24px auto;            /* Centraliza com margem vertical */
+  padding:16px;                /* Espaço interno */
+}
+
+/* ========================================================================
+   HEADER (CABEÇALHO)
+   ======================================================================== */
+
+/* Header com título e barra de busca lado a lado */
+header.header{
+  display:flex;                /* Usa flexbox para layout */
+  align-items:center;          /* Alinha itens verticalmente no centro */
+  justify-content:space-between; /* Espaço entre título e busca */
+  gap:12px;                    /* Espaço entre elementos */
+}
+
+/* Container do título */
+.title{
+  display:flex;                /* Usa flexbox */
+  flex-direction:column;       /* Empilha h1 e p verticalmente */
+}
+
+/* Título principal (h1) */
+.title h1{
+  margin:0;                    /* Remove margem padrão */
+  font-size:24px;              /* Tamanho da fonte */
+}
+
+/* Subtítulo (p) */
+.title p{
+  margin:0;                    /* Remove margem padrão */
+  color:var(--muted);          /* Cor cinza */
+  font-size:14px;              /* Tamanho menor */
+}
+
+/* ========================================================================
+   BARRA DE BUSCA
+   ======================================================================== */
+
+/* Container da barra de busca */
+.search{
+  display:flex;                /* Usa flexbox */
+  gap:8px;                     /* Espaço entre input, botão e select */
+  align-items:center;          /* Alinha itens verticalmente */
+}
+
+/* Estilos para input e select (compartilhados) */
+.input{
+  padding:10px 12px;           /* Espaço interno */
+  border-radius:10px;          /* Cantos arredondados */
+  border:1px solid var(--border); /* Borda cinza claro */
+  background:#fff;             /* Fundo branco */
+  color:inherit;               /* Herda cor do texto */
+  min-width:260px;             /* Largura mínima */
+}
+
+/* ========================================================================
+   BOTÕES
+   ======================================================================== */
+
+/* Estilos dos botões */
+.btn{
+  padding:10px 14px;           /* Espaço interno */
+  border-radius:10px;          /* Cantos arredondados */
+  border:1px solid transparent; /* Sem borda visível */
+  cursor:pointer;              /* Cursor de clique */
+  background:var(--accent);    /* Fundo vermelho */
+  color:#fff;                  /* Texto branco */
+}
+
+/* Efeito ao passar o mouse sobre o botão */
+.btn:hover{
+  filter:brightness(0.95);     /* Escurece um pouco */
+}
+
+/* ========================================================================
+   GRID DE CARDS (LISTA DE POKÉMONS)
+   ======================================================================== */
+
+/* Container da grade de cards */
+.grid{
+  display:grid;                /* Usa CSS Grid */
+  grid-template-columns:repeat(3,1fr); /* 3 colunas iguais */
+  gap:16px;                    /* Espaço entre cards */
+  margin-top:20px;             /* Espaço acima */
+}
+
+/* ========================================================================
+   CARD DE POKÉMON
+   ======================================================================== */
+
+/* Estilos do card */
+.card{
+  background:var(--card);      /* Fundo cinza claro */
+  border:1px solid var(--border); /* Borda cinza */
+  padding:16px;                /* Espaço interno */
+  border-radius:14px;          /* Cantos arredondados */
+  display:flex;                /* Usa flexbox */
+  flex-direction:row;          /* Imagem e dados lado a lado */
+  align-items:center;          /* Alinha itens verticalmente */
+  gap:16px;                    /* Espaço entre imagem e dados */
+  cursor:pointer;              /* Cursor de clique */
+  transition:transform .12s ease, box-shadow .12s ease; /* Animação suave */
+}
+
+/* Efeito ao passar o mouse sobre o card */
+.card:hover{
+  transform:translateY(-4px);  /* Sobe um pouco */
+  box-shadow:0 8px 22px rgba(0,0,0,0.08); /* Sombra suave */
+}
+
+/* Imagem dentro do card */
+.card img{
+  width:128px;                 /* Largura */
+  height:128px;                /* Altura */
+  object-fit:contain;          /* Mantém proporção */
+  flex:0 0 auto;               /* Não encolhe nem cresce */
+}
+
+/* Container de informações (nome e tipos) */
+.card .info{
+  display:flex;                /* Usa flexbox */
+  flex-direction:column;       /* Empilha verticalmente */
+  gap:6px;                     /* Espaço entre título e tipos */
+}
+
+/* Título do card (nome e ID) */
+.card .title{
+  font-weight:600;             /* Texto em negrito */
+}
+
+/* ========================================================================
+   TIPOS (BADGES)
+   ======================================================================== */
+
+/* Container de tipos */
+.types{
+  display:flex;                /* Usa flexbox */
+  gap:6px;                     /* Espaço entre badges */
+  flex-wrap:wrap;              /* Quebra linha se necessário */
+}
+
+/* Badge de tipo individual */
+.type{
+  padding:4px 10px;            /* Espaço interno */
+  border-radius:999px;         /* Cantos muito arredondados (pílula) */
+  background:#fff;             /* Fundo branco */
+  border:1px solid var(--border); /* Borda cinza */
+  font-size:13px;              /* Tamanho pequeno */
+  text-transform:capitalize;   /* Primeira letra maiúscula */
+  color:#0f172a;               /* Texto escuro */
+}
+
+/* ========================================================================
+   PAINEL DE DETALHES
+   ======================================================================== */
+
+/* Painel lateral com detalhes do pokémon */
+.detail{
+  position:fixed;              /* Fixo na tela */
+  right:20px;                  /* 20px da direita */
+  top:20px;                    /* 20px do topo */
+  width:360px;                 /* Largura */
+  background:#fff;             /* Fundo branco */
+  border:1px solid var(--border); /* Borda cinza */
+  padding:16px;                /* Espaço interno */
+  border-radius:12px;          /* Cantos arredondados */
+  box-shadow:0 8px 24px rgba(0,0,0,0.1); /* Sombra */
+  z-index:40;                  /* Fica acima de outros elementos */
+}
+
+/* ========================================================================
+   LINHA DE STAT (ATRIBUTO)
+   ======================================================================== */
+
+/* Linha com nome do atributo e valor */
+.stat-row{
+  display:flex;                /* Usa flexbox */
+  justify-content:space-between; /* Nome à esquerda, valor à direita */
+  margin:6px 0;                /* Espaço vertical */
+  font-size:13px;              /* Tamanho pequeno */
+  color:var(--muted);          /* Cor cinza */
+  text-transform:capitalize;   /* Primeira letra maiúscula */
+}
+
+/* ========================================================================
+   PAGINAÇÃO
+   ======================================================================== */
+
+/* Container dos botões de paginação */
+.pagination{
+  display:flex;                /* Usa flexbox */
+  gap:8px;                     /* Espaço entre botões */
+  justify-content:center;      /* Centraliza */
+  margin-top:16px;             /* Espaço acima */
+}
+
+/* ========================================================================
+   TEXTO MUTED (SECUNDÁRIO)
+   ======================================================================== */
+
+/* Texto de cor secundária (usado em mensagens de erro) */
+.muted{
+  color:var(--muted);          /* Cor cinza */
+  font-size:13px;              /* Tamanho pequeno */
+}
+
+/* ========================================================================
+   MEDIA QUERIES (RESPONSIVIDADE)
+   ======================================================================== */
+
+/* Em telas com até 1000px de largura */
+@media (max-width:1000px){
+  .grid{
+    grid-template-columns:repeat(2,1fr); /* 2 colunas em vez de 3 */
+  }
+}
+
+/* Em telas com até 640px de largura (celulares) */
+@media (max-width:640px){
+  .grid{
+    grid-template-columns:1fr; /* 1 coluna (full width) */
+  }
+}
